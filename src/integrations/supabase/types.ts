@@ -14,16 +14,286 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      mata_pelajaran: {
+        Row: {
+          aktif: boolean
+          created_at: string
+          id: string
+          kelompok: Database["public"]["Enums"]["kelompok_mapel"]
+          kode: string
+          nama: string
+          updated_at: string
+          urutan: number
+        }
+        Insert: {
+          aktif?: boolean
+          created_at?: string
+          id?: string
+          kelompok?: Database["public"]["Enums"]["kelompok_mapel"]
+          kode: string
+          nama: string
+          updated_at?: string
+          urutan?: number
+        }
+        Update: {
+          aktif?: boolean
+          created_at?: string
+          id?: string
+          kelompok?: Database["public"]["Enums"]["kelompok_mapel"]
+          kode?: string
+          nama?: string
+          updated_at?: string
+          urutan?: number
+        }
+        Relationships: []
+      }
+      nilai: {
+        Row: {
+          created_at: string
+          id: string
+          mapel_id: string
+          nilai_akhir: number | null
+          sem1: number | null
+          sem2: number | null
+          sem3: number | null
+          sem4: number | null
+          sem5: number | null
+          sem6: number | null
+          siswa_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          mapel_id: string
+          nilai_akhir?: number | null
+          sem1?: number | null
+          sem2?: number | null
+          sem3?: number | null
+          sem4?: number | null
+          sem5?: number | null
+          sem6?: number | null
+          siswa_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          mapel_id?: string
+          nilai_akhir?: number | null
+          sem1?: number | null
+          sem2?: number | null
+          sem3?: number | null
+          sem4?: number | null
+          sem5?: number | null
+          sem6?: number | null
+          siswa_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "nilai_mapel_id_fkey"
+            columns: ["mapel_id"]
+            isOneToOne: false
+            referencedRelation: "mata_pelajaran"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nilai_siswa_id_fkey"
+            columns: ["siswa_id"]
+            isOneToOne: false
+            referencedRelation: "siswa"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      pengaturan: {
+        Row: {
+          alamat: string
+          bentuk_pendidikan: string | null
+          created_at: string
+          id: string
+          jenjang: string | null
+          judul_pengumuman: string | null
+          kabupaten: string | null
+          kecamatan: string | null
+          kelurahan: string | null
+          kepala_sekolah: string
+          nama_sekolah: string
+          nip_kepala: string | null
+          npsn: string
+          pengumuman_dibuka: boolean
+          pesan_pengumuman: string | null
+          provinsi: string | null
+          status_sekolah: string | null
+          tahun_pelajaran: string | null
+          tanggal_pengumuman: string | null
+          updated_at: string
+          url_validasi_base: string | null
+        }
+        Insert: {
+          alamat?: string
+          bentuk_pendidikan?: string | null
+          created_at?: string
+          id?: string
+          jenjang?: string | null
+          judul_pengumuman?: string | null
+          kabupaten?: string | null
+          kecamatan?: string | null
+          kelurahan?: string | null
+          kepala_sekolah?: string
+          nama_sekolah?: string
+          nip_kepala?: string | null
+          npsn?: string
+          pengumuman_dibuka?: boolean
+          pesan_pengumuman?: string | null
+          provinsi?: string | null
+          status_sekolah?: string | null
+          tahun_pelajaran?: string | null
+          tanggal_pengumuman?: string | null
+          updated_at?: string
+          url_validasi_base?: string | null
+        }
+        Update: {
+          alamat?: string
+          bentuk_pendidikan?: string | null
+          created_at?: string
+          id?: string
+          jenjang?: string | null
+          judul_pengumuman?: string | null
+          kabupaten?: string | null
+          kecamatan?: string | null
+          kelurahan?: string | null
+          kepala_sekolah?: string
+          nama_sekolah?: string
+          nip_kepala?: string | null
+          npsn?: string
+          pengumuman_dibuka?: boolean
+          pesan_pengumuman?: string | null
+          provinsi?: string | null
+          status_sekolah?: string | null
+          tahun_pelajaran?: string | null
+          tanggal_pengumuman?: string | null
+          updated_at?: string
+          url_validasi_base?: string | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string | null
+          id: string
+          nama: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          id: string
+          nama?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          nama?: string
+        }
+        Relationships: []
+      }
+      siswa: {
+        Row: {
+          created_at: string
+          id: string
+          jenis_kelamin: string | null
+          jurusan: string | null
+          kelas: string | null
+          nama: string
+          nama_orang_tua: string | null
+          nis: string | null
+          nisn: string
+          no_peserta_ujian: string | null
+          no_seri_ijazah: string | null
+          status_lulus: boolean
+          tanggal_lahir: string | null
+          tanggal_lulus: string | null
+          tempat_lahir: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          jenis_kelamin?: string | null
+          jurusan?: string | null
+          kelas?: string | null
+          nama: string
+          nama_orang_tua?: string | null
+          nis?: string | null
+          nisn: string
+          no_peserta_ujian?: string | null
+          no_seri_ijazah?: string | null
+          status_lulus?: boolean
+          tanggal_lahir?: string | null
+          tanggal_lulus?: string | null
+          tempat_lahir?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          jenis_kelamin?: string | null
+          jurusan?: string | null
+          kelas?: string | null
+          nama?: string
+          nama_orang_tua?: string | null
+          nis?: string | null
+          nisn?: string
+          no_peserta_ujian?: string | null
+          no_seri_ijazah?: string | null
+          status_lulus?: boolean
+          tanggal_lahir?: string | null
+          tanggal_lulus?: string | null
+          tempat_lahir?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin"
+      kelompok_mapel: "A" | "B" | "Peminatan" | "Lintas Minat"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +420,9 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin"],
+      kelompok_mapel: ["A", "B", "Peminatan", "Lintas Minat"],
+    },
   },
 } as const
