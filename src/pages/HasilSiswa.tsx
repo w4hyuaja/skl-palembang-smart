@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ArrowLeft, CheckCircle2, FileText, XCircle } from "lucide-react";
+import { ArrowLeft, CheckCircle2, FileText, XCircle, AlertTriangle } from "lucide-react";
 import { Link as RLink } from "react-router-dom";
 
 const HasilSiswa = () => {
@@ -50,20 +50,26 @@ const HasilSiswa = () => {
     );
   }
 
-  const lulus = siswa.status_lulus;
+  // Tentukan status: prefer status_kelulusan baru, fallback ke status_lulus
+  const status: "lulus" | "tunda" | "belum" =
+    siswa.status_kelulusan && ["lulus", "tunda", "belum"].includes(siswa.status_kelulusan)
+      ? siswa.status_kelulusan
+      : siswa.status_lulus ? "lulus" : "belum";
+
+  const borderColor = status === "lulus" ? "border-success" : status === "tunda" ? "border-gold" : "border-destructive";
 
   return (
     <div className="min-h-screen bg-gradient-soft py-8 px-4">
       <div className="max-w-2xl mx-auto">
         <Link to="/"><Button variant="ghost" className="mb-4"><ArrowLeft className="h-4 w-4 mr-2" /> Kembali</Button></Link>
 
-        <Card className={`p-10 text-center shadow-elegant border-t-8 ${lulus ? "border-success" : "border-destructive"}`}>
+        <Card className={`p-10 text-center shadow-elegant border-t-8 ${borderColor}`}>
           <p className="text-sm uppercase tracking-widest text-muted-foreground">Hasil Pengumuman Kelulusan</p>
           <h1 className="font-serif text-3xl md:text-4xl mt-3 mb-2">{siswa.nama}</h1>
           <p className="text-sm text-muted-foreground">NISN: {siswa.nisn} {siswa.kelas && `• Kelas ${siswa.kelas}`}</p>
 
           <div className="my-8">
-            {lulus ? (
+            {status === "lulus" && (
               <>
                 <CheckCircle2 className="h-20 w-20 text-success mx-auto mb-4" />
                 <div className="font-serif text-5xl md:text-6xl text-success font-bold">LULUS</div>
@@ -71,7 +77,28 @@ const HasilSiswa = () => {
                   Selamat! Anda dinyatakan <strong className="text-success">LULUS</strong> dari {pengaturan?.nama_sekolah}.
                 </p>
               </>
-            ) : (
+            )}
+            {status === "tunda" && (
+              <>
+                <AlertTriangle className="h-20 w-20 text-gold mx-auto mb-4" />
+                <div className="font-serif text-5xl md:text-6xl text-gold font-bold">TUNDA</div>
+                <p className="mt-4 text-muted-foreground max-w-md mx-auto">
+                  Kelulusan Anda <strong className="text-gold">DITUNDA</strong> karena belum menyelesaikan ujian praktek pada mata pelajaran berikut:
+                </p>
+                {Array.isArray(siswa.mapel_tunda) && siswa.mapel_tunda.length > 0 && (
+                  <div className="mt-4 inline-block text-left bg-gold/10 border border-gold/40 rounded-lg p-4">
+                    <ul className="list-disc list-inside text-sm space-y-1">
+                      {siswa.mapel_tunda.map((m: string, i: number) => <li key={i} className="font-medium">{m}</li>)}
+                    </ul>
+                  </div>
+                )}
+                {siswa.alasan_tunda && (
+                  <p className="text-xs text-muted-foreground mt-3 max-w-md mx-auto">{siswa.alasan_tunda}</p>
+                )}
+                <p className="text-sm text-muted-foreground mt-4">Segera hubungi guru mata pelajaran terkait untuk penjadwalan ulang.</p>
+              </>
+            )}
+            {status === "belum" && (
               <>
                 <XCircle className="h-20 w-20 text-destructive mx-auto mb-4" />
                 <div className="font-serif text-5xl md:text-6xl text-destructive font-bold">BELUM LULUS</div>
@@ -82,7 +109,7 @@ const HasilSiswa = () => {
             )}
           </div>
 
-          {lulus && (
+          {status === "lulus" && (
             <RLink to={`/skl/${siswa.nisn}`}>
               <Button className="bg-gradient-hero hover:opacity-95 h-12 px-6">
                 <FileText className="h-5 w-5 mr-2" /> Lihat & Cetak SKL
