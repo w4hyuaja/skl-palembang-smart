@@ -42,9 +42,13 @@ export default function SKLDocument({ siswa, pengaturan, mapel, nilai, bentuk }:
     >
       {/* KOP */}
       <div className="flex items-center gap-4 border-b-4 border-double border-[hsl(var(--skl-accent))] pb-3">
-        <div className="h-20 w-20 rounded-full bg-[hsl(var(--skl-accent))] flex items-center justify-center text-white shrink-0">
-          <span className="font-bold text-2xl">M</span>
-        </div>
+        {pengaturan.logo_url ? (
+          <img src={pengaturan.logo_url} alt="Logo Sekolah" className="h-20 w-20 object-contain shrink-0" />
+        ) : (
+          <div className="h-20 w-20 rounded-full bg-[hsl(var(--skl-accent))] flex items-center justify-center text-white shrink-0">
+            <span className="font-bold text-2xl">M</span>
+          </div>
+        )}
         <div className="flex-1 text-center leading-tight">
           <div className="text-[10px] tracking-widest">PIMPINAN DAERAH MUHAMMADIYAH KOTA PALEMBANG</div>
           <div className="text-base font-bold">MAJELIS PENDIDIKAN DASAR DAN MENENGAH</div>
