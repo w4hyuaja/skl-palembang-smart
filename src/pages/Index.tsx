@@ -17,6 +17,7 @@ interface Pengaturan {
   pengumuman_dibuka: boolean;
   judul_pengumuman: string | null;
   pesan_pengumuman: string | null;
+  logo_url?: string | null;
 }
 
 function useCountdown(target?: string | null) {
