@@ -57,6 +57,28 @@ export default function PengaturanPage() {
 
       <Card className="p-6 space-y-4">
         <h2 className="font-serif text-xl">Identitas Sekolah</h2>
+        <div className="flex items-start gap-4 mb-2">
+          <div className="h-24 w-24 rounded-md border-2 border-dashed border-border flex items-center justify-center bg-muted/30 overflow-hidden shrink-0">
+            {p.logo_url ? (
+              <img src={p.logo_url} alt="Logo" className="h-full w-full object-contain" />
+            ) : (
+              <ImageIcon className="h-8 w-8 text-muted-foreground" />
+            )}
+          </div>
+          <div className="flex-1">
+            <label className="text-sm font-medium block mb-1">Logo Sekolah</label>
+            <p className="text-xs text-muted-foreground mb-2">Format PNG/JPG, ideal 400×400px. Tampil di kop SKL & halaman publik.</p>
+            <input ref={fileRef} type="file" accept="image/*" hidden onChange={uploadLogo} />
+            <div className="flex gap-2">
+              <Button type="button" variant="outline" size="sm" onClick={() => fileRef.current?.click()} disabled={uploading}>
+                <Upload className="h-4 w-4 mr-2" />{uploading ? "Mengunggah..." : "Unggah Logo"}
+              </Button>
+              {p.logo_url && (
+                <Button type="button" variant="ghost" size="sm" onClick={() => setP({ ...p, logo_url: "" })}>Hapus</Button>
+              )}
+            </div>
+          </div>
+        </div>
         <div className="grid grid-cols-2 gap-3">
           <F label="Nama Sekolah" v={p.nama_sekolah} on={(v) => setP({ ...p, nama_sekolah: v })} className="col-span-2" />
           <F label="NPSN" v={p.npsn} on={(v) => setP({ ...p, npsn: v })} />
@@ -68,6 +90,24 @@ export default function PengaturanPage() {
           <F label="Provinsi" v={p.provinsi} on={(v) => setP({ ...p, provinsi: v })} />
           <F label="Status" v={p.status_sekolah} on={(v) => setP({ ...p, status_sekolah: v })} />
           <F label="Bentuk Pendidikan" v={p.bentuk_pendidikan} on={(v) => setP({ ...p, bentuk_pendidikan: v })} />
+        </div>
+      </Card>
+
+      <Card className="p-6 space-y-4">
+        <h2 className="font-serif text-xl">Format SKL untuk Siswa</h2>
+        <p className="text-sm text-muted-foreground -mt-2">Pilih bentuk SKL yang akan ditampilkan ke siswa pada halaman pengumuman. Siswa tidak dapat mengubah format ini.</p>
+        <div className="grid grid-cols-2 gap-3">
+          <div>
+            <label className="text-sm font-medium">Bentuk SKL Default</label>
+            <Select value={p.bentuk_skl_default ?? "akhir"} onValueChange={(v) => setP({ ...p, bentuk_skl_default: v })}>
+              <SelectTrigger><SelectValue /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="akhir">SKL dengan Nilai Akhir</SelectItem>
+                <SelectItem value="rata">SKL dengan Rata-rata Semester</SelectItem>
+                <SelectItem value="tanpa">SKL Tanpa Nilai</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
       </Card>
 
