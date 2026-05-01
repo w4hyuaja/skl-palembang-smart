@@ -12,6 +12,22 @@ import { Save, Upload, Image as ImageIcon } from "lucide-react";
 export default function PengaturanPage() {
   const [p, setP] = useState<any>(null);
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  async function uploadLogo(e: React.ChangeEvent<HTMLInputElement>) {
+    const f = e.target.files?.[0];
+    if (!f || !p) return;
+    setUploading(true);
+    const ext = f.name.split(".").pop();
+    const path = `logo-${Date.now()}.${ext}`;
+    const { error: upErr } = await supabase.storage.from("logos").upload(path, f, { upsert: true });
+    if (upErr) { setUploading(false); return toast.error(upErr.message); }
+    const { data: { publicUrl } } = supabase.storage.from("logos").getPublicUrl(path);
+    setP({ ...p, logo_url: publicUrl });
+    setUploading(false);
+    toast.success("Logo terunggah. Klik Simpan.");
+  }
 
   useEffect(() => {
     supabase.from("pengaturan").select("*").limit(1).maybeSingle().then(({ data }) => setP(data));
