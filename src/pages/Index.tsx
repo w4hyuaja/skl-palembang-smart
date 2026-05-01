@@ -78,8 +78,12 @@ const Index = () => {
       <header className="bg-gradient-hero text-primary-foreground">
         <div className="container mx-auto px-4 py-6 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="h-12 w-12 rounded-full bg-gold flex items-center justify-center shadow-gold">
-              <GraduationCap className="h-7 w-7 text-gold-foreground" />
+            <div className="h-12 w-12 rounded-full bg-gold flex items-center justify-center shadow-gold overflow-hidden">
+              {p?.logo_url ? (
+                <img src={p.logo_url} alt="Logo Sekolah" className="h-full w-full object-contain" />
+              ) : (
+                <GraduationCap className="h-7 w-7 text-gold-foreground" />
+              )}
             </div>
             <div>
               <h1 className="font-serif text-lg md:text-xl leading-tight">{p?.nama_sekolah ?? "SMA MUHAMMADIYAH 01 PALEMBANG"}</h1>
