@@ -82,20 +82,42 @@ const HasilSiswa = () => {
               <>
                 <AlertTriangle className="h-20 w-20 text-gold mx-auto mb-4" />
                 <div className="font-serif text-5xl md:text-6xl text-gold font-bold">TUNDA</div>
-                <p className="mt-4 text-muted-foreground max-w-md mx-auto">
-                  Kelulusan Anda <strong className="text-gold">DITUNDA</strong> karena belum menyelesaikan ujian praktek pada mata pelajaran berikut:
+                <p className="mt-4 text-muted-foreground max-w-lg mx-auto">
+                  Mohon maaf, kelulusan Anda <strong className="text-gold">DITUNDA</strong> karena masih ada <strong>ujian praktek</strong> yang belum Anda selesaikan.
                 </p>
-                {Array.isArray(siswa.mapel_tunda) && siswa.mapel_tunda.length > 0 && (
-                  <div className="mt-4 inline-block text-left bg-gold/10 border border-gold/40 rounded-lg p-4">
-                    <ul className="list-disc list-inside text-sm space-y-1">
-                      {siswa.mapel_tunda.map((m: string, i: number) => <li key={i} className="font-medium">{m}</li>)}
-                    </ul>
-                  </div>
-                )}
-                {siswa.alasan_tunda && (
-                  <p className="text-xs text-muted-foreground mt-3 max-w-md mx-auto">{siswa.alasan_tunda}</p>
-                )}
-                <p className="text-sm text-muted-foreground mt-4">Segera hubungi guru mata pelajaran terkait untuk penjadwalan ulang.</p>
+
+                <div className="mt-6 max-w-lg mx-auto text-left bg-gold/10 border-2 border-gold/50 rounded-xl p-5">
+                  <p className="text-xs uppercase tracking-wider text-gold font-bold mb-3 text-center">
+                    Mata Pelajaran yang Belum Anda Ujikan
+                  </p>
+                  {Array.isArray(siswa.mapel_tunda) && siswa.mapel_tunda.length > 0 ? (
+                    <ol className="list-decimal list-inside space-y-1.5 text-sm marker:text-gold marker:font-bold">
+                      {siswa.mapel_tunda.map((m: string, i: number) => (
+                        <li key={i} className="font-semibold text-foreground">{m}</li>
+                      ))}
+                    </ol>
+                  ) : (
+                    <p className="text-sm text-center text-muted-foreground italic">
+                      Detail mapel belum dicantumkan. Silakan hubungi wali kelas Anda.
+                    </p>
+                  )}
+                  {siswa.alasan_tunda && (
+                    <div className="mt-4 pt-3 border-t border-gold/30">
+                      <p className="text-xs font-semibold text-gold mb-1">Catatan dari Sekolah:</p>
+                      <p className="text-sm text-foreground">{siswa.alasan_tunda}</p>
+                    </div>
+                  )}
+                </div>
+
+                <div className="mt-6 max-w-lg mx-auto text-left bg-muted/40 rounded-lg p-4 border border-border">
+                  <p className="text-sm font-semibold mb-2">Langkah Selanjutnya:</p>
+                  <ol className="list-decimal list-inside text-sm text-muted-foreground space-y-1">
+                    <li>Hubungi <strong>guru mata pelajaran</strong> yang tertera di atas.</li>
+                    <li>Lakukan <strong>penjadwalan ulang ujian praktek</strong>.</li>
+                    <li>Setelah selesai, status kelulusan akan diperbarui oleh sekolah.</li>
+                    <li>Cek kembali halaman ini untuk melihat hasil terbaru.</li>
+                  </ol>
+                </div>
               </>
             )}
             {status === "belum" && (
