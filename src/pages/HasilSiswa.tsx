@@ -28,8 +28,9 @@ const HasilSiswa = () => {
 
   if (!siswa) {
     return (
-      <div className="min-h-screen bg-gradient-soft flex items-center justify-center p-4">
-        <Card className="p-8 max-w-md text-center shadow-elegant">
+      <div className="min-h-screen bg-background relative flex items-center justify-center p-4">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-accent/50 via-background to-background -z-10 pointer-events-none" />
+        <Card className="p-8 max-w-md text-center shadow-md rounded-2xl border-border/50 bg-card/80 backdrop-blur-sm">
           <XCircle className="h-12 w-12 text-destructive mx-auto mb-3" />
           <h2 className="font-serif text-2xl mb-2">Data Tidak Ditemukan</h2>
           <p className="text-muted-foreground mb-6">NISN yang dimasukkan tidak terdaftar.</p>
@@ -41,8 +42,9 @@ const HasilSiswa = () => {
 
   if (!dibuka) {
     return (
-      <div className="min-h-screen bg-gradient-soft flex items-center justify-center p-4">
-        <Card className="p-8 max-w-md text-center shadow-elegant">
+      <div className="min-h-screen bg-background relative flex items-center justify-center p-4">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-accent/50 via-background to-background -z-10 pointer-events-none" />
+        <Card className="p-8 max-w-md text-center shadow-md rounded-2xl border-border/50 bg-card/80 backdrop-blur-sm">
           <h2 className="font-serif text-2xl mb-2">Pengumuman Belum Dibuka</h2>
           <Link to="/" className="mt-4 inline-block"><Button variant="outline">Kembali</Button></Link>
         </Card>
@@ -59,11 +61,12 @@ const HasilSiswa = () => {
   const borderColor = status === "lulus" ? "border-success" : status === "tunda" ? "border-gold" : "border-destructive";
 
   return (
-    <div className="min-h-screen bg-gradient-soft py-8 px-4">
-      <div className="max-w-2xl mx-auto">
-        <Link to="/"><Button variant="ghost" className="mb-4"><ArrowLeft className="h-4 w-4 mr-2" /> Kembali</Button></Link>
+    <div className="min-h-screen bg-background relative overflow-hidden py-8 px-4">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-accent/50 via-background to-background -z-10 pointer-events-none" />
+      <div className="max-w-2xl mx-auto relative z-10">
+        <Link to="/"><Button variant="ghost" className="mb-4 hover:bg-accent/50"><ArrowLeft className="h-4 w-4 mr-2" /> Kembali</Button></Link>
 
-        <Card className={`p-10 text-center shadow-elegant border-t-8 ${borderColor}`}>
+        <Card className={`p-10 text-center shadow-lg border-x border-b border-border/50 bg-card/90 backdrop-blur-sm rounded-2xl border-t-8 ${borderColor}`}>
           <p className="text-sm uppercase tracking-widest text-muted-foreground">Hasil Pengumuman Kelulusan</p>
           <h1 className="font-serif text-3xl md:text-4xl mt-3 mb-2">{siswa.nama}</h1>
           <p className="text-sm text-muted-foreground">NISN: {siswa.nisn} {siswa.kelas && `• Kelas ${siswa.kelas}`}</p>
@@ -133,7 +136,7 @@ const HasilSiswa = () => {
 
           {status === "lulus" && (
             <RLink to={`/skl/${siswa.nisn}`}>
-              <Button className="bg-gradient-hero hover:opacity-95 h-12 px-6">
+              <Button className="bg-gradient-to-r from-primary to-primary-glow text-primary-foreground shadow-md hover:shadow-lg transition-all h-14 px-8 rounded-xl text-base font-semibold">
                 <FileText className="h-5 w-5 mr-2" /> Lihat & Cetak SKL
               </Button>
             </RLink>
