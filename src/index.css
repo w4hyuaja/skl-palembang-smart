@@ -9,137 +9,103 @@
 
 @layer base {
   :root {
-    --background: 40 33% 98%;
-    --foreground: 150 30% 12%;
+    --background: 150 30% 98%;
+    --foreground: 160 25% 12%;
 
     --card: 0 0% 100%;
-    --card-foreground: 150 30% 12%;
+    --card-foreground: 160 25% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 150 30% 12%;
+    --popover-foreground: 160 25% 12%;
 
-    /* Hijau Muhammadiyah */
-    --primary: 150 100% 18%;
-    --primary-foreground: 40 33% 98%;
-    --primary-glow: 150 70% 32%;
+    --primary: 158 64% 32%;
+    --primary-foreground: 150 30% 98%;
+    --primary-glow: 158 70% 45%;
 
-    /* Emas */
-    --secondary: 45 78% 47%;
-    --secondary-foreground: 150 30% 12%;
-    --gold: 45 78% 47%;
-    --gold-foreground: 150 30% 12%;
+    --secondary: 150 30% 94%;
+    --secondary-foreground: 160 25% 12%;
 
-    --muted: 150 15% 95%;
-    --muted-foreground: 150 10% 40%;
+    --muted: 150 20% 95%;
+    --muted-foreground: 160 10% 42%;
 
-    --accent: 45 78% 92%;
-    --accent-foreground: 150 100% 18%;
+    --accent: 158 50% 92%;
+    --accent-foreground: 158 64% 22%;
 
-    --destructive: 0 75% 45%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 98%;
 
-    --success: 145 65% 38%;
-    --success-foreground: 0 0% 100%;
+    --success: 158 64% 40%;
+    --warning: 38 92% 50%;
 
-    --warning: 35 92% 50%;
-    --warning-foreground: 0 0% 10%;
+    --border: 150 20% 90%;
+    --input: 150 20% 90%;
+    --ring: 158 64% 32%;
 
-    --border: 150 15% 88%;
-    --input: 150 15% 88%;
-    --ring: 150 100% 18%;
+    --radius: 0.75rem;
 
-    --radius: 0.625rem;
+    --gradient-primary: linear-gradient(135deg, hsl(158 64% 32%), hsl(158 70% 45%));
+    --gradient-soft: linear-gradient(180deg, hsl(150 40% 97%), hsl(150 30% 94%));
+    --gradient-hero: radial-gradient(ellipse at top, hsl(158 50% 92%), hsl(150 30% 98%));
 
-    /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(150 100% 14%) 0%, hsl(150 80% 22%) 50%, hsl(150 60% 30%) 100%);
-    --gradient-gold: linear-gradient(135deg, hsl(45 85% 52%) 0%, hsl(38 90% 48%) 100%);
-    --gradient-soft: linear-gradient(180deg, hsl(40 33% 98%) 0%, hsl(150 20% 95%) 100%);
+    --shadow-sm: 0 1px 2px hsl(158 30% 20% / 0.04);
+    --shadow-md: 0 4px 16px -4px hsl(158 40% 25% / 0.08);
+    --shadow-lg: 0 20px 50px -20px hsl(158 50% 25% / 0.18);
+    --shadow-glow: 0 0 40px hsl(158 70% 45% / 0.25);
 
-    /* Shadows */
-    --shadow-elegant: 0 10px 30px -12px hsl(150 100% 18% / 0.25);
-    --shadow-gold: 0 8px 24px -8px hsl(45 78% 47% / 0.4);
-    --shadow-card: 0 2px 8px -2px hsl(150 30% 12% / 0.08);
-
-    /* SKL print colors (always identical light/dark) */
-    --skl-ink: 150 30% 12%;
-    --skl-paper: 0 0% 100%;
-    --skl-accent: 150 100% 18%;
-    --skl-gold: 45 78% 47%;
-
-    --sidebar-background: 150 100% 14%;
-    --sidebar-foreground: 40 33% 98%;
-    --sidebar-primary: 45 78% 47%;
-    --sidebar-primary-foreground: 150 30% 12%;
-    --sidebar-accent: 150 80% 22%;
-    --sidebar-accent-foreground: 40 33% 98%;
-    --sidebar-border: 150 60% 22%;
-    --sidebar-ring: 45 78% 47%;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
-    --background: 150 30% 8%;
-    --foreground: 40 33% 96%;
-    --card: 150 30% 11%;
-    --card-foreground: 40 33% 96%;
-    --popover: 150 30% 11%;
-    --popover-foreground: 40 33% 96%;
-    --primary: 45 78% 55%;
-    --primary-foreground: 150 30% 8%;
-    --secondary: 150 60% 25%;
-    --secondary-foreground: 40 33% 96%;
-    --muted: 150 20% 16%;
+    --background: 160 25% 8%;
+    --foreground: 150 30% 96%;
+    --card: 160 25% 10%;
+    --card-foreground: 150 30% 96%;
+    --popover: 160 25% 10%;
+    --popover-foreground: 150 30% 96%;
+    --primary: 158 70% 45%;
+    --primary-foreground: 160 25% 8%;
+    --secondary: 160 20% 16%;
+    --secondary-foreground: 150 30% 96%;
+    --muted: 160 20% 16%;
     --muted-foreground: 150 10% 65%;
-    --accent: 150 30% 20%;
-    --accent-foreground: 40 33% 96%;
-    --border: 150 20% 20%;
-    --input: 150 20% 20%;
-    --ring: 45 78% 55%;
+    --accent: 160 30% 18%;
+    --accent-foreground: 150 30% 96%;
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 150 30% 96%;
+    --border: 160 20% 18%;
+    --input: 160 20% 18%;
+    --ring: 158 70% 45%;
   }
 }
 
 @layer base {
-  * { @apply border-border; }
+  * {
+    @apply border-border;
+  }
+
   body {
     @apply bg-background text-foreground;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
     font-feature-settings: "ss01", "cv11";
   }
+
   h1, h2, h3, h4 {
-    font-family: 'Merriweather', 'Georgia', serif;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
     @apply tracking-tight;
   }
 }
 
-/* SKL print styles */
-@layer utilities {
-  .text-gradient-gold {
-    background: var(--gradient-gold);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+@layer components {
+  .surat-paper {
+    background: white;
+    background-image:
+      linear-gradient(hsl(var(--border) / 0.4) 1px, transparent 1px);
+    background-size: 100% 32px;
   }
-  .bg-gradient-hero { background: var(--gradient-hero); }
-  .bg-gradient-gold { background: var(--gradient-gold); }
-  .bg-gradient-soft { background: var(--gradient-soft); }
-  .shadow-elegant { box-shadow: var(--shadow-elegant); }
-  .shadow-gold { box-shadow: var(--shadow-gold); }
-  .shadow-card { box-shadow: var(--shadow-card); }
-  .font-serif-display { font-family: 'Merriweather', Georgia, serif; }
 }
-
-/* Print: hide everything except the SKL */
-@media print {
-  body * { visibility: hidden; }
-  .skl-print, .skl-print * { visibility: visible; }
-  .skl-print { position: absolute; left: 0; top: 0; width: 100%; }
-  .no-print { display: none !important; }
-  .page-break { page-break-after: always; break-after: page; }
-  @page { size: A4; margin: 12mm; }
-}
-
-/* Countdown digit pulse */
-@keyframes pulse-soft {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.92; transform: scale(1.02); }
-}
-.animate-pulse-soft { animation: pulse-soft 2s ease-in-out infinite; }
