@@ -23,6 +23,7 @@ export default function CetakMassal() {
       const { data: m } = await supabase.from("mata_pelajaran").select("*").eq("aktif", true).order("urutan");
       const { data: n } = await supabase.from("nilai").select("*");
       setPengaturan(p); setSiswa(s || []); setMapel(m || []);
+      if (p?.bentuk_skl_default) setBentuk(p.bentuk_skl_default as SKLBentuk);
       const map: Record<string, any[]> = {};
       (n || []).forEach((row) => { (map[row.siswa_id] ||= []).push(row); });
       setNilaiAll(map);

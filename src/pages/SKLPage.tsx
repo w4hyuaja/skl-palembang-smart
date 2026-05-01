@@ -1,5 +1,5 @@
-import { useEffect, useState, useRef } from "react";
-import { useParams, useSearchParams, Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -8,8 +8,6 @@ import SKLDocument, { type SKLBentuk } from "@/components/skl/SKLDocument";
 
 const SKLPage = () => {
   const { nisn } = useParams();
-  const [params, setParams] = useSearchParams();
-  const bentuk = (params.get("bentuk") as SKLBentuk) || "akhir";
   const [data, setData] = useState<any>(null);
   const [pengaturan, setPengaturan] = useState<any>(null);
   const [mapel, setMapel] = useState<any[]>([]);
@@ -43,17 +41,15 @@ const SKLPage = () => {
     );
   }
 
+  // Bentuk SKL ditentukan oleh admin (pengaturan), bukan dipilih siswa
+  const bentuk = (pengaturan.bentuk_skl_default as SKLBentuk) || "akhir";
+
   return (
     <div className="min-h-screen bg-muted py-8 px-4">
       <div className="max-w-5xl mx-auto no-print">
         <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
           <Link to={`/hasil/${nisn}`}><Button variant="ghost"><ArrowLeft className="h-4 w-4 mr-2" /> Kembali</Button></Link>
-          <div className="flex flex-wrap gap-2">
-            <Button variant={bentuk === "akhir" ? "default" : "outline"} size="sm" onClick={() => setParams({ bentuk: "akhir" })}>SKL Nilai Akhir</Button>
-            <Button variant={bentuk === "rata" ? "default" : "outline"} size="sm" onClick={() => setParams({ bentuk: "rata" })}>SKL Rata Semester</Button>
-            <Button variant={bentuk === "tanpa" ? "default" : "outline"} size="sm" onClick={() => setParams({ bentuk: "tanpa" })}>SKL Tanpa Nilai</Button>
-            <Button onClick={() => window.print()} className="bg-gradient-hero"><Printer className="h-4 w-4 mr-2" /> Cetak</Button>
-          </div>
+          <Button onClick={() => window.print()} className="bg-gradient-hero"><Printer className="h-4 w-4 mr-2" /> Cetak SKL</Button>
         </div>
       </div>
       <div className="skl-print">

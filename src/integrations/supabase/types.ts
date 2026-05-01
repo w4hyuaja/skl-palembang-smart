@@ -111,6 +111,7 @@ export type Database = {
         Row: {
           alamat: string
           bentuk_pendidikan: string | null
+          bentuk_skl_default: string
           created_at: string
           id: string
           jenjang: string | null
@@ -119,6 +120,7 @@ export type Database = {
           kecamatan: string | null
           kelurahan: string | null
           kepala_sekolah: string
+          logo_url: string | null
           nama_sekolah: string
           nip_kepala: string | null
           npsn: string
@@ -134,6 +136,7 @@ export type Database = {
         Insert: {
           alamat?: string
           bentuk_pendidikan?: string | null
+          bentuk_skl_default?: string
           created_at?: string
           id?: string
           jenjang?: string | null
@@ -142,6 +145,7 @@ export type Database = {
           kecamatan?: string | null
           kelurahan?: string | null
           kepala_sekolah?: string
+          logo_url?: string | null
           nama_sekolah?: string
           nip_kepala?: string | null
           npsn?: string
@@ -157,6 +161,7 @@ export type Database = {
         Update: {
           alamat?: string
           bentuk_pendidikan?: string | null
+          bentuk_skl_default?: string
           created_at?: string
           id?: string
           jenjang?: string | null
@@ -165,6 +170,7 @@ export type Database = {
           kecamatan?: string | null
           kelurahan?: string | null
           kepala_sekolah?: string
+          logo_url?: string | null
           nama_sekolah?: string
           nip_kepala?: string | null
           npsn?: string
@@ -202,17 +208,20 @@ export type Database = {
       }
       siswa: {
         Row: {
+          alasan_tunda: string | null
           created_at: string
           id: string
           jenis_kelamin: string | null
           jurusan: string | null
           kelas: string | null
+          mapel_tunda: string[] | null
           nama: string
           nama_orang_tua: string | null
           nis: string | null
           nisn: string
           no_peserta_ujian: string | null
           no_seri_ijazah: string | null
+          status_kelulusan: string
           status_lulus: boolean
           tanggal_lahir: string | null
           tanggal_lulus: string | null
@@ -220,17 +229,20 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          alasan_tunda?: string | null
           created_at?: string
           id?: string
           jenis_kelamin?: string | null
           jurusan?: string | null
           kelas?: string | null
+          mapel_tunda?: string[] | null
           nama: string
           nama_orang_tua?: string | null
           nis?: string | null
           nisn: string
           no_peserta_ujian?: string | null
           no_seri_ijazah?: string | null
+          status_kelulusan?: string
           status_lulus?: boolean
           tanggal_lahir?: string | null
           tanggal_lulus?: string | null
@@ -238,17 +250,20 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          alasan_tunda?: string | null
           created_at?: string
           id?: string
           jenis_kelamin?: string | null
           jurusan?: string | null
           kelas?: string | null
+          mapel_tunda?: string[] | null
           nama?: string
           nama_orang_tua?: string | null
           nis?: string | null
           nisn?: string
           no_peserta_ujian?: string | null
           no_seri_ijazah?: string | null
+          status_kelulusan?: string
           status_lulus?: boolean
           tanggal_lahir?: string | null
           tanggal_lulus?: string | null
