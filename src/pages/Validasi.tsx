@@ -24,7 +24,11 @@ const Validasi = () => {
 
   if (loading) return <div className="min-h-screen flex items-center justify-center">Memuat...</div>;
 
-  const valid = siswa && siswa.status_lulus;
+  const status: "lulus" | "tunda" | "belum" | "none" = !siswa
+    ? "none"
+    : (siswa.status_kelulusan && ["lulus", "tunda", "belum"].includes(siswa.status_kelulusan))
+      ? siswa.status_kelulusan
+      : (siswa.status_lulus ? "lulus" : "belum");
 
   return (
     <div className="min-h-screen bg-gradient-soft flex items-center justify-center p-4">
@@ -32,7 +36,7 @@ const Validasi = () => {
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent text-accent-foreground text-xs font-medium mb-4">
           <ShieldCheck className="h-4 w-4" /> HALAMAN VALIDASI RESMI
         </div>
-        {valid ? (
+        {status === "lulus" && (
           <>
             <CheckCircle2 className="h-16 w-16 text-success mx-auto mb-3" />
             <h1 className="font-serif text-2xl mb-2">SKL Asli & Terverifikasi</h1>
@@ -45,7 +49,23 @@ const Validasi = () => {
               <Row k="Status" v="LULUS" />
             </div>
           </>
-        ) : (
+        )}
+        {status === "tunda" && (
+          <>
+            <XCircle className="h-16 w-16 text-gold mx-auto mb-3" />
+            <h1 className="font-serif text-2xl mb-2">Status: TUNDA</h1>
+            <p className="text-muted-foreground text-sm mb-4">Siswa berikut tercatat dalam basis data namun kelulusannya ditunda.</p>
+            <div className="text-left bg-muted/50 rounded-lg p-4 space-y-1 text-sm">
+              <Row k="Nama" v={siswa.nama} bold />
+              <Row k="NISN" v={siswa.nisn} />
+              <Row k="Status" v="TUNDA" />
+              {Array.isArray(siswa.mapel_tunda) && siswa.mapel_tunda.length > 0 && (
+                <Row k="Mapel Tunda" v={siswa.mapel_tunda.join(", ")} />
+              )}
+            </div>
+          </>
+        )}
+        {(status === "belum" || status === "none") && (
           <>
             <XCircle className="h-16 w-16 text-destructive mx-auto mb-3" />
             <h1 className="font-serif text-2xl mb-2">SKL Tidak Ditemukan</h1>
