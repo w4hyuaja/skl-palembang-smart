@@ -152,15 +152,41 @@ const Index = () => {
             </p>
           </form>
         </Card>
+
+        {/* Cara Cek SKL */}
+        <Card className="max-w-3xl mx-auto p-8 mt-8 shadow-card border border-border/60">
+          <div className="flex items-center gap-2 mb-4">
+            <ListChecks className="h-5 w-5 text-primary" />
+            <h3 className="font-serif text-xl">Cara Cek Hasil Kelulusan & SKL</h3>
+          </div>
+          <ol className="space-y-3 text-sm">
+            {[
+              "Tunggu hingga hitungan mundur pengumuman selesai (tombol akan aktif otomatis).",
+              "Masukkan Nomor Induk Siswa Nasional (NISN) Anda pada kolom di atas.",
+              "Klik tombol \"Lihat Hasil Kelulusan\" untuk menampilkan status kelulusan.",
+              "Bila dinyatakan LULUS, klik tombol \"Lihat & Cetak SKL\" untuk membuka Surat Keterangan Lulus.",
+              "Cetak SKL melalui browser (Ctrl+P / Cmd+P) atau simpan sebagai PDF. Validasi keaslian dapat dipindai melalui QR Code pada SKL.",
+            ].map((step, i) => (
+              <li key={i} className="flex gap-3">
+                <span className="shrink-0 h-7 w-7 rounded-full bg-gradient-hero text-primary-foreground flex items-center justify-center text-xs font-bold">{i + 1}</span>
+                <span className="pt-0.5 leading-relaxed">{step}</span>
+              </li>
+            ))}
+          </ol>
+          <div className="mt-5 p-4 rounded-lg bg-accent/40 text-sm">
+            <strong>Status "TUNDA":</strong> jika muncul status Tunda, artinya Anda belum menyelesaikan ujian praktek pada mata pelajaran tertentu. Segera hubungi guru mapel terkait untuk penjadwalan ulang.
+          </div>
+        </Card>
       </main>
 
       <footer className="bg-primary text-primary-foreground/90 mt-16">
         <div className="container mx-auto px-4 py-8 text-center text-sm">
           <p className="font-serif text-base mb-1">{p?.nama_sekolah ?? "SMA MUHAMMADIYAH 01 PALEMBANG"}</p>
           <p className="opacity-80">{p?.alamat ?? "JL. BALAYUDHA KM. 4,5 NO. 21A PALEMBANG"}</p>
-          <p className="opacity-60 mt-3 text-xs">© {new Date().getFullYear()} • Sistem SKL Digital</p>
+          <p className="opacity-60 mt-3 text-xs">© {new Date().getFullYear()} • Dibuat oleh TIM Kurikulum</p>
         </div>
       </footer>
+
     </div>
   );
 };
