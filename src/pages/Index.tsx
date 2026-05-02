@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
-import { GraduationCap, Lock, Search, Sparkles, ListChecks } from "lucide-react";
+import { GraduationCap, Lock, Search, Sparkles, ListChecks, ShieldCheck } from "lucide-react";
 import { toast } from "sonner";
 
 interface Pengaturan {
@@ -73,60 +73,77 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-accent/50 via-background to-background -z-10 pointer-events-none" />
+    <div className="min-h-screen bg-background text-foreground relative overflow-x-hidden">
+      {/* Decorative gradient blobs */}
+      <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
+        <div className="absolute top-[-10%] left-[-10%] w-[60vw] h-[60vw] max-w-[600px] max-h-[600px] rounded-full bg-primary/10 blur-3xl animate-float" />
+        <div className="absolute bottom-[-15%] right-[-10%] w-[50vw] h-[50vw] max-w-[500px] max-h-[500px] rounded-full bg-primary-glow/10 blur-3xl animate-float" style={{ animationDelay: "2s" }} />
+      </div>
 
       {/* Header */}
-      <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/70 backdrop-blur-md supports-[backdrop-filter]:bg-background/40">
-        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-xl bg-primary flex items-center justify-center shadow-md overflow-hidden">
+      <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/60 backdrop-blur-xl">
+        <div className="container mx-auto px-4 h-14 sm:h-16 flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+            <div className="h-9 w-9 sm:h-10 sm:w-10 shrink-0 rounded-xl bg-primary flex items-center justify-center shadow-md overflow-hidden ring-2 ring-primary/20">
               {p?.logo_url ? (
-                <img src={p.logo_url} alt="Logo Sekolah" className="h-full w-full object-contain p-1" />
+                <img src={p.logo_url} alt="Logo" loading="lazy" decoding="async" className="h-full w-full object-contain p-1" />
               ) : (
-                <GraduationCap className="h-6 w-6 text-primary-foreground" />
+                <GraduationCap className="h-5 w-5 sm:h-6 sm:w-6 text-primary-foreground" />
               )}
             </div>
-            <div>
-              <h1 className="font-serif font-bold text-lg leading-tight tracking-tight">{p?.nama_sekolah ?? "e-SKL"}</h1>
+            <div className="min-w-0">
+              <h1 className="font-serif font-bold text-sm sm:text-base leading-tight tracking-tight truncate">
+                {p?.nama_sekolah ?? "e-SKL"}
+              </h1>
+              <p className="text-[10px] sm:text-xs text-muted-foreground truncate hidden sm:block">Sistem Pengumuman Kelulusan</p>
             </div>
           </div>
-          <Link to="/admin/login">
-            <Button variant="ghost" size="sm" className="text-foreground hover:bg-accent/50 rounded-full px-4">
-              <Lock className="h-4 w-4 mr-2 opacity-70" /> Admin
+          <Link to="/admin/login" className="shrink-0">
+            <Button variant="ghost" size="sm" className="h-9 rounded-full px-3 sm:px-4 text-xs sm:text-sm hover:bg-accent/60">
+              <Lock className="h-3.5 w-3.5 sm:mr-2 opacity-70" />
+              <span className="hidden sm:inline">Admin</span>
             </Button>
           </Link>
         </div>
       </header>
 
-      <main className="container mx-auto px-4 pt-12 pb-24 md:pt-20 md:pb-32 flex flex-col items-center relative z-10">
-        <div className="max-w-3xl mx-auto text-center mb-10">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/50 text-primary font-medium text-sm mb-8 border border-primary/10 shadow-sm">
-            <Sparkles className="h-4 w-4" /> {p?.judul_pengumuman ?? "PENGUMUMAN KELULUSAN"}
+      <main className="container mx-auto px-4 pt-8 pb-16 sm:pt-14 sm:pb-24 md:pt-20 md:pb-32 flex flex-col items-center">
+        {/* Hero */}
+        <div className="max-w-3xl mx-auto text-center mb-8 sm:mb-10 animate-fade-in">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-accent/60 text-primary font-medium text-xs sm:text-sm mb-5 sm:mb-8 border border-primary/15 shadow-sm">
+            <Sparkles className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+            <span className="truncate">{p?.judul_pengumuman ?? "PENGUMUMAN KELULUSAN"}</span>
           </div>
-          <h2 className="font-serif font-extrabold text-4xl md:text-5xl lg:text-6xl text-foreground leading-tight mb-6 max-w-4xl">
-            Sistem Informasi <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary-glow">Kelulusan</span>
+          <h2 className="font-serif font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-[1.1] mb-4 sm:mb-6 px-2">
+            Sistem Informasi{" "}
+            <span className="text-gradient inline-block">Kelulusan</span>
           </h2>
-          <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto mb-12">
-            {p?.pesan_pengumuman ?? "Silakan masukkan Nomor Induk Siswa Nasional (NISN) Anda untuk melihat hasil pengumuman kelulusan dan mengunduh SKL."}
+          <p className="text-muted-foreground text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed px-2">
+            {p?.pesan_pengumuman ?? "Masukkan Nomor Induk Siswa Nasional (NISN) Anda untuk melihat hasil pengumuman dan mengunduh SKL."}
           </p>
         </div>
 
         {/* Countdown */}
         {!dibuka && p?.tanggal_pengumuman && (
-          <Card className="w-full max-w-2xl mx-auto p-8 mb-8 shadow-md border border-border/50 bg-card rounded-2xl relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-primary-glow"></div>
-            <p className="text-center text-sm font-semibold tracking-wider text-muted-foreground mb-6">PENGUMUMAN DIBUKA DALAM</p>
-            <div className="grid grid-cols-4 gap-3 md:gap-4">
+          <Card className="w-full max-w-2xl p-5 sm:p-8 mb-6 sm:mb-8 shadow-lg border border-border/50 bg-card/80 backdrop-blur-md rounded-2xl relative overflow-hidden animate-scale-in">
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-primary-glow to-primary" />
+            <p className="text-center text-[11px] sm:text-sm font-semibold tracking-[0.2em] text-muted-foreground mb-4 sm:mb-6">
+              PENGUMUMAN DIBUKA DALAM
+            </p>
+            <div className="grid grid-cols-4 gap-2 sm:gap-4">
               {[
                 { v: cd.d, l: "HARI" },
                 { v: cd.h, l: "JAM" },
                 { v: cd.m, l: "MENIT" },
                 { v: cd.s, l: "DETIK" },
               ].map((x) => (
-                <div key={x.l} className="bg-background rounded-xl p-4 md:p-6 text-center border border-border/50 shadow-sm">
-                  <div className="font-serif text-3xl md:text-5xl font-bold tabular-nums text-primary">{String(x.v).padStart(2, "0")}</div>
-                  <div className="text-[10px] md:text-xs font-semibold text-muted-foreground mt-2 tracking-wider">{x.l}</div>
+                <div key={x.l} className="bg-gradient-to-br from-background to-accent/30 rounded-xl p-2.5 sm:p-5 text-center border border-border/60 shadow-sm transition-transform hover:scale-105">
+                  <div className="font-serif text-2xl sm:text-4xl md:text-5xl font-bold tabular-nums text-primary leading-none">
+                    {String(x.v).padStart(2, "0")}
+                  </div>
+                  <div className="text-[9px] sm:text-xs font-semibold text-muted-foreground mt-1.5 sm:mt-2 tracking-widest">
+                    {x.l}
+                  </div>
                 </div>
               ))}
             </div>
@@ -134,79 +151,100 @@ const Index = () => {
         )}
 
         {/* Form NISN */}
-        <Card className="w-full max-w-2xl mx-auto p-6 md:p-8 shadow-md border border-border/50 bg-card rounded-2xl relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-primary-glow"></div>
-          <form onSubmit={cekKelulusan} className="space-y-6">
+        <Card className="w-full max-w-2xl p-5 sm:p-8 shadow-xl border border-border/50 bg-card/80 backdrop-blur-md rounded-2xl relative overflow-hidden animate-scale-in" style={{ animationDelay: "0.15s" }}>
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-primary-glow" />
+          <form onSubmit={cekKelulusan} className="space-y-5 sm:space-y-6">
             <div>
-              <label className="text-sm font-semibold mb-2 block text-foreground">Nomor Induk Siswa Nasional (NISN)</label>
-              <Input
-                placeholder="Contoh: 0012345678"
-                value={nisn}
-                onChange={(e) => setNisn(e.target.value.replace(/\D/g, ""))}
-                maxLength={20}
-                inputMode="numeric"
-                className="h-14 text-lg rounded-xl bg-background border-border/50 focus:ring-2 focus:ring-primary/20 transition-all"
-              />
+              <label htmlFor="nisn-input" className="text-sm font-semibold mb-2 block">
+                Nomor Induk Siswa Nasional (NISN)
+              </label>
+              <div className="relative">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 sm:h-5 sm:w-5 text-muted-foreground pointer-events-none" />
+                <Input
+                  id="nisn-input"
+                  placeholder="Contoh: 0012345678"
+                  value={nisn}
+                  onChange={(e) => setNisn(e.target.value.replace(/\D/g, ""))}
+                  maxLength={20}
+                  inputMode="numeric"
+                  autoComplete="off"
+                  className="h-12 sm:h-14 pl-11 sm:pl-12 text-base sm:text-lg rounded-xl bg-background/80 border-border/60 focus-visible:ring-2 focus-visible:ring-primary/30 transition-all"
+                />
+              </div>
             </div>
-            <Button type="submit" disabled={loading || !dibuka} className="w-full h-14 text-base font-semibold rounded-xl bg-gradient-to-r from-primary to-primary-glow text-primary-foreground shadow-md hover:shadow-lg transition-all hover:-translate-y-0.5">
-              <Search className="h-5 w-5 mr-2" />
-              {dibuka ? (loading ? "Memeriksa..." : "Lihat Hasil Kelulusan") : "Belum Dibuka"}
+            <Button
+              type="submit"
+              disabled={loading || !dibuka}
+              className={`w-full h-12 sm:h-14 text-sm sm:text-base font-semibold rounded-xl bg-gradient-to-r from-primary to-primary-glow text-primary-foreground shadow-md hover:shadow-xl transition-all hover:-translate-y-0.5 active:translate-y-0 ${dibuka ? "animate-pulse-glow" : ""}`}
+            >
+              {loading ? (
+                <>
+                  <span className="h-4 w-4 sm:h-5 sm:w-5 mr-2 rounded-full border-2 border-primary-foreground/30 border-t-primary-foreground animate-spin" />
+                  Memeriksa...
+                </>
+              ) : (
+                <>
+                  <Search className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
+                  {dibuka ? "Lihat Hasil Kelulusan" : "Belum Dibuka"}
+                </>
+              )}
             </Button>
-            <p className="text-sm text-muted-foreground text-center">
+            <p className="text-xs sm:text-sm text-muted-foreground text-center leading-relaxed">
               Pastikan NISN sesuai data sekolah. Hubungi panitia jika ada kendala.
             </p>
           </form>
         </Card>
 
         {/* Cara Cek SKL */}
-        <div className="w-full max-w-5xl mx-auto mt-20 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card className="p-6 rounded-2xl shadow-sm border border-border/50 bg-card/50 backdrop-blur-sm hover:shadow-md transition-all">
-            <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-              <Search className="h-6 w-6 text-primary" />
-            </div>
-            <h3 className="font-serif font-bold text-lg mb-2">1. Masukkan NISN</h3>
-            <p className="text-muted-foreground text-sm leading-relaxed">
-              Ketikkan Nomor Induk Siswa Nasional (NISN) Anda pada kolom pencarian yang tersedia.
-            </p>
-          </Card>
-          
-          <Card className="p-6 rounded-2xl shadow-sm border border-border/50 bg-card/50 backdrop-blur-sm hover:shadow-md transition-all">
-            <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-              <Sparkles className="h-6 w-6 text-primary" />
-            </div>
-            <h3 className="font-serif font-bold text-lg mb-2">2. Lihat Hasil</h3>
-            <p className="text-muted-foreground text-sm leading-relaxed">
-              Klik tombol pencarian untuk melihat status kelulusan Anda secara langsung.
-            </p>
-          </Card>
+        <section className="w-full max-w-5xl mx-auto mt-14 sm:mt-20">
+          <div className="text-center mb-8 sm:mb-10 animate-fade-in">
+            <h3 className="font-serif font-bold text-2xl sm:text-3xl mb-2">Cara Cek SKL</h3>
+            <p className="text-sm sm:text-base text-muted-foreground">Tiga langkah mudah untuk mengetahui hasil kelulusan</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 stagger">
+            {[
+              { icon: Search, title: "Masukkan NISN", desc: "Ketikkan Nomor Induk Siswa Nasional (NISN) Anda pada kolom pencarian." },
+              { icon: Sparkles, title: "Lihat Hasil", desc: "Klik tombol pencarian untuk melihat status kelulusan secara langsung." },
+              { icon: ListChecks, title: "Unduh SKL", desc: "Jika lulus, Anda dapat mengunduh dan mencetak Surat Keterangan Lulus." },
+            ].map((step, i) => (
+              <Card key={i} className="group p-5 sm:p-6 rounded-2xl shadow-sm border border-border/50 bg-card/60 backdrop-blur-sm hover:shadow-lg hover:-translate-y-1 hover:border-primary/30 transition-all duration-300">
+                <div className="flex items-start gap-4 sm:block">
+                  <div className="h-11 w-11 sm:h-12 sm:w-12 shrink-0 rounded-xl bg-primary/10 flex items-center justify-center sm:mb-4 group-hover:bg-primary/15 group-hover:scale-110 transition-all">
+                    <step.icon className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <h4 className="font-serif font-bold text-base sm:text-lg mb-1.5 sm:mb-2">
+                      <span className="text-primary mr-1.5">{i + 1}.</span>{step.title}
+                    </h4>
+                    <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">{step.desc}</p>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </section>
 
-          <Card className="p-6 rounded-2xl shadow-sm border border-border/50 bg-card/50 backdrop-blur-sm hover:shadow-md transition-all">
-            <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-              <ListChecks className="h-6 w-6 text-primary" />
-            </div>
-            <h3 className="font-serif font-bold text-lg mb-2">3. Unduh SKL</h3>
-            <p className="text-muted-foreground text-sm leading-relaxed">
-              Jika dinyatakan lulus, Anda dapat mengunduh dan mencetak Surat Keterangan Lulus.
-            </p>
-          </Card>
+        {/* Verifikasi badge */}
+        <div className="mt-12 sm:mt-16 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/40 border border-border/50 text-xs sm:text-sm text-muted-foreground animate-fade-in">
+          <ShieldCheck className="h-4 w-4 text-primary" />
+          <span>Setiap SKL dilengkapi QR Code untuk verifikasi keaslian</span>
         </div>
       </main>
 
-      <footer className="border-t border-border/50 bg-card text-foreground py-10 mt-auto">
+      <footer className="border-t border-border/50 bg-card/60 backdrop-blur-sm py-8 sm:py-10 mt-auto">
         <div className="container mx-auto px-4 text-center">
-          <div className="flex justify-center items-center gap-2 mb-4">
-            <GraduationCap className="h-6 w-6 text-primary" />
-            <span className="font-serif font-bold text-lg">{p?.nama_sekolah ?? "SMA MUHAMMADIYAH 01 PALEMBANG"}</span>
+          <div className="flex justify-center items-center gap-2 mb-3 sm:mb-4">
+            <GraduationCap className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
+            <span className="font-serif font-bold text-sm sm:text-lg">{p?.nama_sekolah ?? "SMA MUHAMMADIYAH 01 PALEMBANG"}</span>
           </div>
-          <p className="text-muted-foreground text-sm max-w-md mx-auto mb-6">
+          <p className="text-muted-foreground text-xs sm:text-sm max-w-md mx-auto mb-5 sm:mb-6 px-4 leading-relaxed">
             {p?.alamat ?? "JL. BALAYUDHA KM. 4,5 NO. 21A PALEMBANG"}
           </p>
-          <div className="text-xs text-muted-foreground/60">
-            © {new Date().getFullYear()} • Dibuat oleh TIM Kurikulum
+          <div className="text-[11px] sm:text-xs text-muted-foreground/70">
+            © {new Date().getFullYear()} • Dibuat oleh <span className="font-semibold text-foreground/80">TIM Kurikulum</span>
           </div>
         </div>
       </footer>
-
     </div>
   );
 };
