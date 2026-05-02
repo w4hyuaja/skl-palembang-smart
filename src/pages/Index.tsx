@@ -84,13 +84,13 @@ const Index = () => {
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/60 backdrop-blur-xl">
         <div className="container mx-auto px-4 h-14 sm:h-16 flex items-center justify-between gap-2">
           <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
-            <div className="h-9 w-9 sm:h-10 sm:w-10 shrink-0 rounded-xl bg-primary flex items-center justify-center shadow-md overflow-hidden ring-2 ring-primary/20">
-              {p?.logo_url ? (
-                <img src={p.logo_url} alt="Logo" loading="lazy" decoding="async" className="h-full w-full object-contain p-1" />
-              ) : (
+            {p?.logo_url ? (
+              <img src={p.logo_url} alt="Logo Sekolah" loading="lazy" decoding="async" className="h-10 w-10 sm:h-11 sm:w-11 shrink-0 object-contain" />
+            ) : (
+              <div className="h-9 w-9 sm:h-10 sm:w-10 shrink-0 rounded-xl bg-primary flex items-center justify-center shadow-md ring-2 ring-primary/20">
                 <GraduationCap className="h-5 w-5 sm:h-6 sm:w-6 text-primary-foreground" />
-              )}
-            </div>
+              </div>
+            )}
             <div className="min-w-0">
               <h1 className="font-serif font-bold text-sm sm:text-base leading-tight tracking-tight truncate">
                 {p?.nama_sekolah ?? "e-SKL"}
