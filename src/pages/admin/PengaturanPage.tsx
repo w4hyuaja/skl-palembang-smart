@@ -58,7 +58,7 @@ export default function PengaturanPage() {
       <Card className="p-6 space-y-4">
         <h2 className="font-serif text-xl">Identitas Sekolah</h2>
         <div className="flex items-start gap-4 mb-2">
-          <div className="h-24 w-24 rounded-md border-2 border-dashed border-border flex items-center justify-center bg-muted/30 overflow-hidden shrink-0">
+          <div className="h-24 w-24 rounded-md border-2 border-dashed border-border flex items-center justify-center bg-[image:linear-gradient(45deg,hsl(var(--muted))_25%,transparent_25%),linear-gradient(-45deg,hsl(var(--muted))_25%,transparent_25%),linear-gradient(45deg,transparent_75%,hsl(var(--muted))_75%),linear-gradient(-45deg,transparent_75%,hsl(var(--muted))_75%)] bg-[length:12px_12px] bg-[position:0_0,0_6px,6px_-6px,-6px_0px] overflow-hidden shrink-0">
             {p.logo_url ? (
               <img src={p.logo_url} alt="Logo" className="h-full w-full object-contain" />
             ) : (
