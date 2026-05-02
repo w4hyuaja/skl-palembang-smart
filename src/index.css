@@ -9,48 +9,53 @@
 
 @layer base {
   :root {
-    --background: 150 30% 98%;
-    --foreground: 160 25% 12%;
+    /* Palet diadaptasi dari tka.kemendikdasmen.go.id — biru cerah + aksen emas */
+    --background: 210 40% 98%;
+    --foreground: 215 35% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 160 25% 12%;
+    --card-foreground: 215 35% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 160 25% 12%;
+    --popover-foreground: 215 35% 15%;
 
-    --primary: 158 64% 32%;
-    --primary-foreground: 150 30% 98%;
-    --primary-glow: 158 70% 45%;
+    --primary: 210 79% 46%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 199 89% 55%;
 
-    --secondary: 150 30% 94%;
-    --secondary-foreground: 160 25% 12%;
+    --secondary: 210 40% 94%;
+    --secondary-foreground: 215 35% 15%;
 
-    --muted: 150 20% 95%;
-    --muted-foreground: 160 10% 42%;
+    --muted: 210 30% 95%;
+    --muted-foreground: 215 15% 42%;
 
-    --accent: 158 50% 92%;
-    --accent-foreground: 158 64% 22%;
+    --accent: 210 80% 94%;
+    --accent-foreground: 210 79% 30%;
 
     --destructive: 0 75% 55%;
     --destructive-foreground: 0 0% 98%;
 
     --success: 158 64% 40%;
+    --success-foreground: 0 0% 100%;
     --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    --gold: 38 92% 50%;
+    --gold-foreground: 215 35% 15%;
 
-    --border: 150 20% 90%;
-    --input: 150 20% 90%;
-    --ring: 158 64% 32%;
+    --border: 210 25% 88%;
+    --input: 210 25% 88%;
+    --ring: 210 79% 46%;
 
     --radius: 0.75rem;
 
-    --gradient-primary: linear-gradient(135deg, hsl(158 64% 32%), hsl(158 70% 45%));
-    --gradient-soft: linear-gradient(180deg, hsl(150 40% 97%), hsl(150 30% 94%));
-    --gradient-hero: radial-gradient(ellipse at top, hsl(158 50% 92%), hsl(150 30% 98%));
+    --gradient-primary: linear-gradient(135deg, hsl(210 79% 46%), hsl(199 89% 55%));
+    --gradient-soft: linear-gradient(180deg, hsl(210 50% 97%), hsl(210 40% 94%));
+    --gradient-hero: radial-gradient(ellipse at top, hsl(210 80% 94%), hsl(210 40% 98%));
 
-    --shadow-sm: 0 1px 2px hsl(158 30% 20% / 0.04);
-    --shadow-md: 0 4px 16px -4px hsl(158 40% 25% / 0.08);
-    --shadow-lg: 0 20px 50px -20px hsl(158 50% 25% / 0.18);
-    --shadow-glow: 0 0 40px hsl(158 70% 45% / 0.25);
+    --shadow-sm: 0 1px 2px hsl(210 40% 20% / 0.04);
+    --shadow-md: 0 4px 16px -4px hsl(210 50% 25% / 0.08);
+    --shadow-lg: 0 20px 50px -20px hsl(210 60% 25% / 0.18);
+    --shadow-glow: 0 0 40px hsl(199 89% 55% / 0.3);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
